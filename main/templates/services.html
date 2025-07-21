@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Main Start -->
+    <main>
+		<!-- Services -->
+		<section class="container my-4">
+			<h1 class="text-center mb-4 section-heading">Services</h1>
+			<div class="row">
+				{% for service in services %}
+				<div class="col-md-4">
+					<div class="card">
+					  <img src="{{service.img.url}}" class="card-img-top" alt="...">
+					  <div class="card-body">
+					    <h3 class="card-title">{{service.title}}</h3>
+					    <p class="card-text">{{service.detail}}</p>
+					  </div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</section>
+		<!-- End -->
+    </main>
+    <!-- End -->
+{% endblock %}

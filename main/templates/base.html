@@ -1,0 +1,121 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}" rel="stylesheet" />
+    <!-- Include jquery -->
+    <script type="text/javascript" src="{% static 'jquery-3.6.0.min.js' %}"></script>
+	<link rel="icon" type="image/jpg" href="{% static 'app_logos/logo.jpg' %}">
+    <title>Home - SweatShop Gym</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <div class="container">
+	    <a class="navbar-brand" href="{% url 'home' %}">{{logo}}</a>
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav ms-auto">
+	        <li class="nav-item">
+	          <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+	        </li>
+			<li class="nav-item">
+				<a class="nav-link" aria-current="page" href="{% url 'services' %}">Services</a>
+			</li>
+	        <li class="nav-item">
+	          <a class="nav-link" aria-current="page" href="{% url 'gallery' %}">Gallery</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="{% url 'pricing' %}">Plans</a>
+	        </li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'enquiry' %}">Enquiry</a>
+			</li>
+	        
+	        <li class="nav-item dropdown">
+	          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	            My Account
+	          </a>
+	          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+	          	{% if not request.user.is_authenticated %}
+		            {% if request.session.trainerLogin %}
+		            <li><a class="dropdown-item" href="{% url 'trainer_dashboard' %}">Dashboard</a></li>
+		            <li><a class="dropdown-item" href="{% url 'trainerlogout' %}">Logout</a></li>
+		            {% else %}
+		            <li><a class="dropdown-item" href="{% url 'trainerlogin' %}">Trainer Login</a></li>
+		            <li><a class="dropdown-item" href="{% url 'signup' %}">Register</a></li>
+		            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+		            {% endif %}
+	            {% else %}
+	            <li><a class="dropdown-item" href="{% url 'user_dashboard' %}">Dashboard</a></li>
+	            <li><a class="dropdown-item" href="{% url 'update_profile' %}">Profile</a></li>
+	            <li><a class="dropdown-item" href="#">Settings</a></li>
+	            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+	            {% endif %}
+	          </ul>
+	        </li>
+			<!-- <li class="nav-item">
+				<a class="nav-link btn btn-dark btn-sm text-white" href="{% url 'enquiry' %}">Enquiry</a>
+			</li> -->
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+    <!-- Header End -->
+
+    {% block content %}
+
+    {% endblock %}
+
+   <!-- Footer Start -->
+  <footer class="container py-5">
+	<section class="container my-4">
+		<h1 class="text-left mb-4 section-heading border-bottom pb-2">Contact Us</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<table class="table table-bordered">
+					<tr>
+						<th>Address</th>
+						<td>Chepkoilel, Eldoret</td>
+					</tr>
+					<tr>
+						<th>Mobile</th>
+						<td>+254 723456799</td>
+					</tr>
+					<tr>
+						<th>Telephone</th>
+						<td>077894562</td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td>sweatshop@gmail.com</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-6">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7979.249069253216!2d35.311952799999986!3d0.5647076999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ske!4v1745866905655!5m2!1sen!2ske" width="700" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div>
+		</div>
+	</section>
+  <p class="float-end"><a href="#">Back to top</a></p>
+  <p>Copyright ©2025 SweatShop Gym, Inc. · 
+        <a href="{% url 'pagedetail' 2 %}">Privacy</a> · 
+        <a href="{% url 'pagedetail' 3 %}">Terms</a> . 
+        <a href="{% url 'faq' %}">FAQ</a> .
+        <a href="{% url 'contact_page' %}">Contact Us</a> .
+    </p>
+</footer>
+
+<!-- Bootstrap Bundle -->
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'popper.min.js' %}"></script>
+</body>
+</html>
